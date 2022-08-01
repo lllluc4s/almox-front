@@ -14,12 +14,12 @@
           <p class="leading-loose mb-5">
             {{ item.user_id }}
           </p>
-          <!-- <NuxtLink
+          <NuxtLink
             class="text-purple-600 font-bold"
-            :to="'/bookings/' + item.id"
+            :to="'/equipments/' + item.id"
           >
             Mais detalhes...
-          </NuxtLink> -->
+          </NuxtLink>
 
           <div class="flex justify-between items-center mt-5">
             <span class="block font-semibold"
