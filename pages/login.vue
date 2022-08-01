@@ -61,6 +61,8 @@
 </template>
 
 <script>
+// import * as axios from 'axios';
+
 export default {
   middleware: 'auth',
   auth: 'guest',
@@ -80,6 +82,21 @@ export default {
 
   methods: {
     submitForm(event) {
+      // axios.get('/sanctum/csrf-cookie').then(() => {
+      //   axios
+      //     .post('/login', {
+      //       email: this.email,
+      //       password: this.password,
+      //       remember: this.remember,
+      //     })
+      //     .then(() => {
+      //       this.$router.push({ name: 'home' })
+      //     })
+      //     .catch((error) => {
+      //       this.errors = error.response.data.errors
+      //     })
+      // })
+
       this.errors = []
 
       this.$auth
