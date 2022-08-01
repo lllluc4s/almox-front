@@ -30,49 +30,32 @@ export default {
 
 	buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
 
-	modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
+	modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
 
 	auth: {
 		strategies: {
-			laravelSanctum: {
-				provider: 'laravel/sanctum',
-				url: 'http://127.0.0.1:8000/api',
-			},
-
-			cookie: {
-				endpoints: {
-					csrf: {
-						url: '/sanctum/csrf-cookie',
-					},
-					login: {
-						url: '/login',
-					},
-					logout: {
-						url: '/logout',
-					},
-					user: {
-						url: '/users',
-					},
-				},
+      local: {
 				user: {
-					property: 'data',
-				},
-			},
-		},
-
-		redirect: {
-			login: '/login',
-			logout: '/login',
-			home: '/',
-		},
-
-		plugins: ['~/plugins/axios'],
+          property: 'user',
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/auth/login', method: 'post', propertyName: 'access_token' },
+          user: { url: '/auth/me', method: 'get', propertyName: false },
+          refresh: { url: '/auth/refresh', method: 'post', propertyName: false },
+          logout: { url: '/auth/logout', method: 'post' },
+        },
+        tokenType: 'bearer',
+      }
+    },
+    plugins: ['~/plugins/auth.js']
 	},
 
 	axios: {
-		baseURL: 'http://127.0.0.1:8000/api',
+		baseURL: 'http://localhost:8000/api',
 		credentials: true,
 	},
+
 
 	build: {},
 }
