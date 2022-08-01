@@ -8,12 +8,14 @@
       <div v-if="bookings.length > 0">
         <div v-for="item in bookings" :key="item.id">
           <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold">{{ item.equipment_id }}</h1>
+            <h1 class="text-2xl font-bold">
+              {{ [item.equipment_type, item.equipment_brand] }}
+            </h1>
             <span class="block font-semibold">{{ item.transaction }}</span>
           </div>
-          <p class="leading-loose mb-5">
+          <!-- <p class="leading-loose mb-5">
             {{ item.user_id }}
-          </p>
+          </p> -->
           <NuxtLink
             class="text-purple-600 font-bold"
             :to="'/equipments/' + item.id"
