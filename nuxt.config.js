@@ -34,6 +34,11 @@ export default {
 
 	auth: {
 		strategies: {
+			laravelSanctum: {
+				provider: 'laravel/sanctum',
+				url: 'http://127.0.0.1:8000/api',
+			},
+
 			cookie: {
 				endpoints: {
 					csrf: {
@@ -46,7 +51,7 @@ export default {
 						url: '/logout',
 					},
 					user: {
-						url: '/user',
+						url: '/users',
 					},
 				},
 				user: {

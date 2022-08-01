@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p v-if="$fetchState.pending">Loading...</p>
-    <p v-else-if="$fetchState.error">Error! :(</p>
+    <p v-if="$fetchState.pending">Carregando...</p>
+    <p v-else-if="$fetchState.error">Ops, ocorreu um erro! :(</p>
     <template v-else>
       <div
         v-for="(equipment, index) in equipments"

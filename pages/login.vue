@@ -54,7 +54,7 @@
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <Button class="ml-3">Acessar</Button>
+        <Button :click="submitForm" class="ml-3">Acessar</Button>
       </div>
     </form>
   </div>
