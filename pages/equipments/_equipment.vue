@@ -1,7 +1,7 @@
 <template>
-  <p v-if="$fetchState.pending">Carregando...</p>
-  <p v-else-if="$fetchState.error">Ops, ocorreu um erro! :(</p>
-  <div v-else class="flex">
+  <!-- <p v-if="$fetchState.pending">Carregando...</p>
+  <p v-else-if="$fetchState.error">Ops, ocorreu um erro! :(</p> -->
+  <div class="flex">
     <div class="w-1/2 h-80 relative overflow-hidden rounded-lg">
       <!-- tag de imagem -->
     </div>
@@ -9,7 +9,7 @@
     <div class="w-full pl-14">
       <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold">{{ equipment.brand }}</h1>
-        <span class="block font-semibold">${{ equipment.status }}</span>
+        <span class="block font-semibold">{{ equipment.status }}</span>
       </div>
       <p class="leading-loose mb-5">
         {{ equipment.type }}
@@ -25,18 +25,26 @@ export default {
     equipment: {},
   }),
 
-  async fetch() {
-    const response = await this.$axios.$get(
-      '/equipments/' + this.$route.params.equipment
-    )
+  mounted() {
+    this.fetch()
 
-    this.equipment = response.data
+    this.head()
   },
 
-  head() {
-    return {
-      title: this.equipment.title + ' — Almoxarifado',
-    }
+  methods: {
+    async fetch() {
+      const response = await this.$axios.$get(
+        '/equipments/' + this.$route.params.equipment
+      )
+
+      this.equipment = response
+    },
+
+    head() {
+      return {
+        title: this.equipment.type + ' — Almoxarifado',
+      }
+    },
   },
 }
 </script>

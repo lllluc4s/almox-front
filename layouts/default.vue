@@ -24,6 +24,21 @@
           </NuxtLink>
 
           <div class="flex items-center text-sm font-semibold">
+            <NuxtLink
+              to="/profile"
+              class="
+                text-gray-700
+                mr-7
+                border border-gray-300
+                hover:border-purple-400 hover:text-purple-700
+                rounded
+                px-4
+                py-2
+              "
+            >
+              Perfil
+            </NuxtLink>
+
             <template v-if="$auth.user">
               <a
                 href=""
@@ -32,20 +47,6 @@
               >
                 Sair
               </a>
-              <NuxtLink
-                to="/profile"
-                class="
-                  text-gray-700
-                  ml-7
-                  border border-gray-300
-                  hover:border-purple-400 hover:text-purple-700
-                  rounded
-                  px-4
-                  py-2
-                "
-              >
-                Perfil
-              </NuxtLink>
             </template>
             <template v-else>
               <NuxtLink to="/login" class="text-gray-700 hover:text-purple-700">
