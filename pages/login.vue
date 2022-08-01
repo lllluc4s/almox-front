@@ -2,7 +2,7 @@
   <div class="w-1/2 mx-auto bg-white p-5 rounded-lg">
     <Errors class="mb-5" :errors="errors"></Errors>
 
-    <form autoComplete="off" @submit.prevent="submitForm">
+    <form method="post" autoComplete="off" @submit.prevent="submitForm">
       <div>
         <Label html-for="email">Email</Label>
 

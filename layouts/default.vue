@@ -52,7 +52,7 @@
                 Entrar
               </NuxtLink>
               <NuxtLink
-                to="/register"
+                to="/createUser"
                 class="
                   text-gray-700
                   ml-7
