@@ -69,7 +69,7 @@ export default {
 
 		deletar() {
 			console.log('deletar')
-			this.$axios.$delete('equipments/' + this.equipment.id)
+			// this.$axios.$delete('equipments/' + this.equipment.id)
 		},
 	},
 }
