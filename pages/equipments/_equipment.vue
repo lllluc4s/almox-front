@@ -1,20 +1,23 @@
 <template>
-  <!-- <p v-if="$fetchState.pending">Carregando...</p>
-  <p v-else-if="$fetchState.error">Ops, ocorreu um erro! :(</p> -->
-  <div class="flex">
+  <div class="mt-20 flex">
     <div class="w-1/2 h-80 relative overflow-hidden rounded-lg">
-      <!-- tag de imagem -->
+      <img
+        class="absolute inset-0 w-full h-full object-cover"
+        :src="equipment.image"
+        alt="Imagem do equipamento"
+      />
     </div>
 
     <div class="w-full pl-14">
       <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold">{{ equipment.brand }}</h1>
+        <h1 class="text-2xl font-bold">{{ equipment.type }}</h1>
         <span class="block font-semibold">{{ equipment.status }}</span>
       </div>
       <p class="leading-loose mb-5">
-        {{ equipment.type }}
+        {{ equipment.patrimony }}
       </p>
-      <Button class="mt-7">Reservar</Button>
+      <Button :click="reservar" class="mt-7">Reservar</Button>
+      <Button :click="deletar" class="mt-7">Deletar</Button>
     </div>
   </div>
 </template>
@@ -34,7 +37,7 @@ export default {
   methods: {
     async fetch() {
       const response = await this.$axios.$get(
-        '/equipments/' + this.$route.params.equipment
+        'equipments/' + this.$route.params.equipment
       )
 
       this.equipment = response
@@ -42,8 +45,20 @@ export default {
 
     head() {
       return {
-        title: this.equipment.type + ' — Almoxarifado',
+        title: this.equipment.type + ' - Almoxarifado',
       }
+    },
+
+    reservar() {
+      this.$axios.$post('bookings', {
+        equipment_id: this.equipment.id,
+      })
+
+      this.$router.push('/bookings')
+    },
+
+    deletar() {
+      this.$axios.$delete('equipments/' + this.equipment.id)
     },
   },
 }

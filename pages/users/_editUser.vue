@@ -3,7 +3,6 @@
     <form method="post" autoComplete="off" @submit.prevent="submit">
       <div class="mt-4">
         <Label html-for="name">Nome</Label>
-
         <Input
           id="name"
           v-model="name"
@@ -17,7 +16,6 @@
 
       <div class="mt-4">
         <Label html-for="email">Email</Label>
-
         <Input
           id="email"
           v-model="email"
@@ -30,8 +28,20 @@
       </div>
 
       <div class="mt-4">
-        <Label html-for="password">Senha</Label>
+        <Label html-for="type">Tipo de conta (admin / user)</Label>
+        <Input
+          id="type"
+          v-model="type"
+          type="string"
+          class="block mt-1 w-full"
+          required
+          auto-focus
+          auto-complete="off"
+        />
+      </div>
 
+      <div class="mt-4">
+        <Label html-for="password">Senha</Label>
         <Input
           id="password"
           v-model="password"
@@ -43,7 +53,7 @@
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <Button :click="submit" class="ml-3">Criar conta</Button>
+        <Button :click="submit" class="ml-3">Editar usuário</Button>
       </div>
     </form>
   </div>
@@ -51,10 +61,13 @@
 
 <script>
 export default {
+  middleware: 'auth',
+
   data: () => ({
     valid: true,
     name: '',
     email: '',
+    type: '',
     password: '',
   }),
 
@@ -63,14 +76,15 @@ export default {
       const data = {
         name: this.name,
         email: this.email,
+        type: this.type,
         password: this.password,
       }
 
       if (this.valid) {
         this.$axios
-          .$post('http://127.0.0.1:8000/api/users', data)
+          .$put(`/users/${this.$auth.user.id}`, data)
           .then(() => {
-            alert('Opa, deu tudo certo! Conta criada com sucesso!')
+            alert('Opa, deu tudo certo! Conta alterada com sucesso!')
           })
           .catch(() => {
             alert('Ops, algo deu errado! Tente novamente.')
@@ -85,6 +99,7 @@ export default {
     resetForm() {
       this.name = ''
       this.email = ''
+      this.type = ''
       this.password = ''
     },
   },

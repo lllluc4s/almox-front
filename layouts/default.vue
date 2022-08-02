@@ -24,22 +24,37 @@
           </NuxtLink>
 
           <div class="flex items-center text-sm font-semibold">
-            <NuxtLink
-              to="/profile"
-              class="
-                text-gray-700
-                mr-7
-                border border-gray-300
-                hover:border-purple-400 hover:text-purple-700
-                rounded
-                px-4
-                py-2
-              "
-            >
-              Perfil
-            </NuxtLink>
-
             <template v-if="$auth.user">
+              <NuxtLink
+                to="/profile"
+                class="
+                  text-gray-700
+                  mr-7
+                  border border-gray-300
+                  hover:border-purple-400 hover:text-purple-700
+                  rounded
+                  px-4
+                  py-2
+                "
+              >
+                Perfil
+              </NuxtLink>
+
+              <NuxtLink
+                to="/createEquipment"
+                class="
+                  text-gray-700
+                  mr-7
+                  border border-gray-300
+                  hover:border-purple-400 hover:text-purple-700
+                  rounded
+                  px-4
+                  py-2
+                "
+              >
+                Registrar equipamento
+              </NuxtLink>
+
               <a
                 href=""
                 class="text-gray-700 hover:text-purple-700"

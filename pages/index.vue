@@ -1,17 +1,21 @@
 <template>
   <div>
-    <div v-for="item in equipments" :key="item.id">
-      <div class="w-1/3 h-56 relative overflow-hidden rounded-lg">
-        <!-- tag de imagem -->
+    <div v-for="item in equipments" :key="item.id" class="m-20">
+      <div class="w-1/3 h-44 relative overflow-hidden rounded-lg">
+        <img
+          class="absolute inset-0 w-full h-full object-cover"
+          :src="item.image"
+          alt="Imagem do equipamento"
+        />
       </div>
 
-      <div class="w-full pl-14">
-        <div class="flex justify-between items-center mb-6">
-          <h1 class="text-2xl font-bold">{{ item.brand }}</h1>
+      <div class="w-full">
+        <div class="flex justify-between items-center mb-1">
+          <h1 class="text-2xl font-bold">{{ item.type }}</h1>
           <span class="block font-semibold">{{ item.status }}</span>
         </div>
-        <p class="leading-loose mb-5">
-          {{ item.type }}
+        <p class="leading-loose mb-4">
+          {{ item.patrimony }}
         </p>
         <NuxtLink
           class="text-purple-600 font-bold"
