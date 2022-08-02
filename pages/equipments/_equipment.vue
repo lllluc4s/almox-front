@@ -17,7 +17,7 @@
         {{ equipment.patrimony }}
       </p>
       <Button :click="reservar" class="mt-7">Reservar</Button>
-      <Button :click="deletar" class="mt-7">Deletar</Button>
+      <Button :click="deletar">Deletar</Button>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   mounted() {
     this.fetch()
 
-    this.head()
+    // this.head()
   },
 
   methods: {
@@ -43,11 +43,11 @@ export default {
       this.equipment = response
     },
 
-    head() {
-      return {
-        title: this.equipment.type + ' - Almoxarifado',
-      }
-    },
+    // head() {
+    //   return {
+    //     title: this.equipment.type + ' - Almoxarifado',
+    //   }
+    // },
 
     reservar() {
       this.$axios.$post('bookings', {
@@ -58,6 +58,7 @@ export default {
     },
 
     deletar() {
+			console.log('deletar')
       this.$axios.$delete('equipments/' + this.equipment.id)
     },
   },
