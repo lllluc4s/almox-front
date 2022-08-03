@@ -124,11 +124,17 @@ export default {
     },
 
     reservar(id) {
-      return confirm('Reservar este equipamento?')
-        ? this.$axios
-            .$post('bookings/transaction/' + id)
-            .then(() => location.reload())
-        : false
+      const equipment = this.equipments.find((item) => item.id === id)
+
+      if (equipment.status === 'Disponível') {
+        return confirm('Reservar este equipamento?')
+          ? this.$axios
+              .$post('bookings/transaction/' + id)
+              .then(() => location.reload())
+          : false
+      } else {
+        return alert('Ops, este equipamento não está disponível. =(')
+      }
     },
 
     cancelarReserva(id) {
