@@ -14,7 +14,7 @@
             relative
             z-10
             space-x-2
-            sm:space-x-3
+            sm:space-x-4
           "
         >
           <NuxtLink to="/" class="block">
