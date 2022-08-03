@@ -26,7 +26,37 @@
           <div class="flex items-center text-sm font-semibold">
             <template v-if="$auth.user">
               <NuxtLink
-                to="/profile"
+                to="/equipments"
+                class="
+                  text-gray-700
+                  mr-7
+                  border border-gray-300
+                  hover:border-purple-400 hover:text-purple-700
+                  rounded
+                  px-4
+                  py-2
+                "
+              >
+                Equipamentos
+              </NuxtLink>
+
+              <NuxtLink
+                to="/bookings"
+                class="
+                  text-gray-700
+                  mr-7
+                  border border-gray-300
+                  hover:border-purple-400 hover:text-purple-700
+                  rounded
+                  px-4
+                  py-2
+                "
+              >
+                Reservas
+              </NuxtLink>
+
+              <NuxtLink
+                to="/userProfile"
                 class="
                   text-gray-700
                   mr-7
@@ -38,21 +68,6 @@
                 "
               >
                 Perfil
-              </NuxtLink>
-
-              <NuxtLink
-                to="/createEquipment"
-                class="
-                  text-gray-700
-                  mr-7
-                  border border-gray-300
-                  hover:border-purple-400 hover:text-purple-700
-                  rounded
-                  px-4
-                  py-2
-                "
-              >
-                Registrar equipamento
               </NuxtLink>
 
               <a

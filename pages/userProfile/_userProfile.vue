@@ -26,7 +26,7 @@
 
 		<NuxtLink
           class="text-purple-600 font-bold"
-          :to="'/users/' + $auth.user.id"
+          :to="'/userEdit/' + $auth.user.id"
         >
           Editar informações
         </NuxtLink>
