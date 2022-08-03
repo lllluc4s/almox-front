@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="mb-10 flex justify-center">
+      <span>Aqui você acompanha a lista de equipamentos.</span>
+    </div>
     <div>
       <table
         class="

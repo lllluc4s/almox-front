@@ -3,7 +3,6 @@
     <form method="post" autoComplete="off" @submit.prevent="submit">
       <div class="mt-4">
         <Label html-for="name">Nome</Label>
-
         <Input
           id="name"
           v-model="name"
@@ -17,7 +16,6 @@
 
       <div class="mt-4">
         <Label html-for="email">Email</Label>
-
         <Input
           id="email"
           v-model="email"
@@ -31,7 +29,6 @@
 
       <div class="mt-4">
         <Label html-for="password">Senha</Label>
-
         <Input
           id="password"
           v-model="password"
