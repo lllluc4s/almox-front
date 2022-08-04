@@ -4,11 +4,11 @@
       Oi, {{ $auth.user.name }}!
     </h1>
 
-    <div class="mb-10 flex justify-center">
+    <div class="flex justify-center">
       <span>Aqui você acompanha e edita suas informações.</span>
     </div>
 
-    <div class="mt-40">
+    <div class="mt-20">
       <h2 class="text-2xl font-black mb-5">Informações</h2>
 
       <div class="flex items-center mb-5">
@@ -37,7 +37,6 @@
 </template>
 
 <script>
-
 export default {
   middleware: 'auth',
 

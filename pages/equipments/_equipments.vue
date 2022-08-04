@@ -151,6 +151,7 @@ export default {
               'Reservado!',
               'O equipamento foi reservado com sucesso.',
               'success',
+
               this.$axios
                 .$post('bookings/transaction/', {
                   equipment_id: id,
@@ -177,16 +178,22 @@ export default {
           confirmButtonText: 'Sim, cancelar!',
           cancelButtonText: 'Desistir',
           reverseButtons: false,
+          ...this.users.reduce((acc, user) => {
+            acc[user.id] = user.name
+            this.user_id = user.id
+            return acc
+          }, {}),
         }).then((result) => {
           if (result.value) {
             this.$swal(
               'Cancelado!',
               'A reserva do equipamento foi cancelada com sucesso.',
               'success',
-              this.$axios
-                .$put('bookings/cancel/' + id)
-                .then(() => location.reload())
-            )
+              this.$axios.$post('bookings/cancel/', {
+                equipment_id: id,
+                user_id: this.user_id,
+              })
+            ).then(() => location.reload())
           } else if (result.dismiss === this.$swal.DismissReason.cancel) {
             this.$swal(
               'Operação cancelada',

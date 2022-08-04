@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div class="mb-10 flex justify-center">
+    <div class="mb-20 flex justify-center">
       <span>Aqui você acompanha todas as reservas.</span>
     </div>
 
-    <div>
+    <div class="flex justify-center items-center">
       <input
         v-model="filtro"
         placeholder="Filtrar"
         type="search"
         name="filtro"
         class="
+          text-center
           border border-gray-300
           rounded
           px-4
           py-2
           w-1/2
-          mb-10
           focus:outline-none
           focus:ring-2
           focus:ring-purple-600
@@ -34,7 +34,7 @@
           w-full
           text-center
           p-1
-          mt-20
+          mt-10
         "
       >
         <thead>
