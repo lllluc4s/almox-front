@@ -22,22 +22,11 @@
 </template>
 
 <script>
-
 export default {
-  data: () => ({
-    users: [],
-  }),
+  data: () => ({}),
 
-  mounted() {
-    this.fetch()
-  },
+  mounted() {},
 
-  methods: {
-    async fetch() {
-      const response = await this.$axios.$get('/users')
-
-      this.users = response
-    },
-  },
+  methods: {},
 }
 </script>

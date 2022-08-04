@@ -3,6 +3,29 @@
     <div class="mb-10 flex justify-center">
       <span>Aqui você acompanha todas as reservas.</span>
     </div>
+
+    <div>
+      <input
+        v-model="filtro"
+        placeholder="Filtrar"
+        type="search"
+        name="filtro"
+        class="
+          border border-gray-300
+          rounded
+          px-4
+          py-2
+          w-1/2
+          mb-10
+          focus:outline-none
+          focus:ring-2
+          focus:ring-purple-600
+          focus:border-transparent
+        "
+        @input="filterBookings"
+      />
+    </div>
+
     <div>
       <table
         class="
@@ -44,21 +67,29 @@
 </template>
 
 <script>
-
 export default {
   data: () => ({
     bookings: [],
+    filtro: '',
   }),
 
-  mounted() {
-    this.fetch()
+  // computed: {},
+
+  async mounted() {
+    const response = await this.$axios.$get('bookings')
+    this.bookings = response
   },
 
   methods: {
-    async fetch() {
-      const response = await this.$axios.$get('bookings')
-
-      this.bookings = response
+    filterBookings() {
+      this.$axios
+        .get('bookings', { params: { filtro: this.filtro } })
+        .then((response) => {
+          this.bookings = response.data
+        })
+        .then((response) => {
+          this.bookings = response.data
+        })
     },
   },
 }

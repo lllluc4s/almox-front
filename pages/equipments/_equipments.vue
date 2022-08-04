@@ -93,17 +93,27 @@ Vue.use(VueSweetalert2)
 export default {
   data: () => ({
     equipments: [],
+    users: [],
+    user_id: '',
   }),
 
   mounted() {
-    this.fetch()
+    this.fetchEquipments()
+
+    this.fetchUsers()
   },
 
   methods: {
-    async fetch() {
+    async fetchEquipments() {
       const response = await this.$axios.$get('equipments')
 
       this.equipments = response
+    },
+
+    async fetchUsers() {
+      const response = await this.$axios.$get('users')
+
+      this.users = response
     },
 
     reservar(id) {
@@ -111,13 +121,30 @@ export default {
 
       if (equipment.status === 'Disponível') {
         this.$swal({
-          title: 'Reservar equipamento',
-          text: 'Deseja reservar este equipamento?',
+          title: 'Deseja reservar este equipamento?',
+          text: 'Selecione um usuário:',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Sim, reservar!',
           cancelButtonText: 'Não, cancelar!',
-          reverseButtons: false,
+          input: 'select',
+          inputOptions: {
+            ...this.users.reduce((acc, user) => {
+              acc[user.id] = user.name
+              this.user_id = user.id
+              return acc
+            }, {}),
+          },
+          inputPlaceholder: 'Selecione:',
+          inputValidator: (value) => {
+            return new Promise(function (resolve, reject) {
+              if (value !== '') {
+                resolve()
+              } else {
+                resolve('Você precisa selecionar uma opção!')
+              }
+            })
+          },
         }).then((result) => {
           if (result.value) {
             this.$swal(
@@ -125,7 +152,10 @@ export default {
               'O equipamento foi reservado com sucesso.',
               'success',
               this.$axios
-                .$post('bookings/transaction/' + id)
+                .$post('bookings/transaction/', {
+                  equipment_id: id,
+                  user_id: this.user_id,
+                })
                 .then(() => location.reload())
             )
           } else if (result.dismiss === this.$swal.DismissReason.cancel) {
@@ -159,7 +189,7 @@ export default {
             )
           } else if (result.dismiss === this.$swal.DismissReason.cancel) {
             this.$swal(
-              'Cancelado',
+              'Operação cancelada',
               'A reserva do equipamento não foi cancelada.',
               'error'
             )
@@ -168,14 +198,33 @@ export default {
       }
     },
 
-    // cancelarReserva(id) {
-    //   return confirm(
-    //     'Tem certeza que deseja cancelar a reserva deste equipamento?'
-    //   )
-    //     ? this.$axios
-    //         .$put('bookings/cancel/' + id)
-    //         .then(() => location.reload())
-    //     : false
+    // reservar(id) {
+    //   const equipment = this.equipments.find((item) => item.id === id)
+
+    //   if (equipment.status === 'Disponível') {
+    //     this.$swal({
+    //       title: 'Reservar equipamento',
+    //       text: 'Deseja reservar este equipamento?',
+    //       icon: 'warning',
+    //       showCancelButton: true,
+    //       confirmButtonText: 'Sim, reservar!',
+    //       cancelButtonText: 'Não, cancelar!',
+    //       reverseButtons: false,
+    //     }).then((result) => {
+    //       if (result.value) {
+    //         this.$swal(
+    //           'Reservado!',
+    //           'O equipamento foi reservado com sucesso.',
+    //           'success',
+    //           this.$axios
+    //             .$post('bookings/transaction/' + id)
+    //             .then(() => location.reload())
+    //         )
+    //       } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+    //         this.$swal('Cancelado', 'O equipamento não foi reservado.', 'error')
+    //       }
+    //     })
+    //   }
     // },
   },
 }

@@ -39,6 +39,19 @@
         />
       </div>
 
+      <div class="mt-4">
+        <Label html-for="type">Tipo da conta (Admin / User)</Label>
+        <Input
+          id="type"
+          v-model="type"
+          type="string"
+          class="block mt-1 w-full"
+          required
+          auto-focus
+          auto-complete="off"
+        />
+      </div>
+
       <div class="flex items-center justify-end mt-4">
         <Button :click="submit" class="ml-3">Criar conta</Button>
       </div>
@@ -47,13 +60,13 @@
 </template>
 
 <script>
-
 export default {
   data: () => ({
     valid: true,
     name: '',
     email: '',
     password: '',
+    type: '',
   }),
 
   methods: {
@@ -62,6 +75,7 @@ export default {
         name: this.name,
         email: this.email,
         password: this.password,
+        type: this.type,
       }
 
       if (this.valid) {
@@ -84,6 +98,7 @@ export default {
       this.name = ''
       this.email = ''
       this.password = ''
+      this.type = ''
     },
   },
 }
