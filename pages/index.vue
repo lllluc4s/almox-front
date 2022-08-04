@@ -2,7 +2,7 @@
   <div>
     <template v-if="$auth.user">
       <h1 class="text-4xl font-black mb-10 flex justify-center">
-        Bem-vindo {{ $auth.user.name }} !
+        Bem-vindo, {{ $auth.user.name }} !
       </h1>
       <h2 class="text-3xl mb-10 flex justify-center">
         Sistema de Almoxarifado
