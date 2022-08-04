@@ -47,7 +47,7 @@
                 fill="#000"
                 class="bi bi-pencil-square"
                 viewBox="0 0 22 22"
-                @click="showAlert"
+                @click="reservar(item.id)"
               >
                 <path
                   d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
@@ -85,11 +85,10 @@
 </template>
 
 <script>
-import Vue from "vue";
-import VueSweetalert2 from "vue-sweetalert2";
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
 
-Vue.use(VueSweetalert2);
-
+Vue.use(VueSweetalert2)
 
 export default {
   data: () => ({
@@ -101,10 +100,6 @@ export default {
   },
 
   methods: {
-		showAlert() {
-      this.$swal("Alerta padrão!!!");
-    },
-
     async fetch() {
       const response = await this.$axios.$get('equipments')
 
@@ -115,25 +110,73 @@ export default {
       const equipment = this.equipments.find((item) => item.id === id)
 
       if (equipment.status === 'Disponível') {
-        return confirm('Reservar este equipamento?')
-          ? this.$axios
-              .$post('bookings/transaction/' + id)
-              .then(() => location.reload())
-          : false
-      } else {
-        return alert('Ops, este equipamento não está disponível. =(')
+        this.$swal({
+          title: 'Reservar equipamento',
+          text: 'Deseja reservar este equipamento?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sim, reservar!',
+          cancelButtonText: 'Não, cancelar!',
+          reverseButtons: false,
+        }).then((result) => {
+          if (result.value) {
+            this.$swal(
+              'Reservado!',
+              'O equipamento foi reservado com sucesso.',
+              'success',
+              this.$axios
+                .$post('bookings/transaction/' + id)
+                .then(() => location.reload())
+            )
+          } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+            this.$swal('Cancelado', 'O equipamento não foi reservado.', 'error')
+          }
+        })
       }
     },
 
     cancelarReserva(id) {
-      return confirm(
-        'Tem certeza que deseja cancelar a reserva deste equipamento?'
-      )
-        ? this.$axios
-            .$put('bookings/cancel/' + id)
-            .then(() => location.reload())
-        : false
+      const equipment = this.equipments.find((item) => item.id === id)
+
+      if (equipment.status === 'Indisponível') {
+        this.$swal({
+          title: 'Cancelar reserva',
+          text: 'Deseja cancelar a reserva deste equipamento?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sim, cancelar!',
+          cancelButtonText: 'Desistir',
+          reverseButtons: false,
+        }).then((result) => {
+          if (result.value) {
+            this.$swal(
+              'Cancelado!',
+              'A reserva do equipamento foi cancelada com sucesso.',
+              'success',
+              this.$axios
+                .$put('bookings/cancel/' + id)
+                .then(() => location.reload())
+            )
+          } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+            this.$swal(
+              'Cancelado',
+              'A reserva do equipamento não foi cancelada.',
+              'error'
+            )
+          }
+        })
+      }
     },
+
+    // cancelarReserva(id) {
+    //   return confirm(
+    //     'Tem certeza que deseja cancelar a reserva deste equipamento?'
+    //   )
+    //     ? this.$axios
+    //         .$put('bookings/cancel/' + id)
+    //         .then(() => location.reload())
+    //     : false
+    // },
   },
 }
 </script>
