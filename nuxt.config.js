@@ -30,32 +30,39 @@ export default {
 
 	buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
 
-	modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
+	modules: ['@nuxtjs/axios', '@nuxtjs/auth', 'vue-sweetalert2/nuxt'],
 
 	auth: {
 		strategies: {
-      local: {
+			local: {
 				user: {
-          property: 'user',
-          // autoFetch: true
-        },
-        endpoints: {
-          login: { url: '/auth/login', method: 'post', propertyName: 'access_token' },
-          user: { url: '/auth/me', method: 'get', propertyName: false },
-          refresh: { url: '/auth/refresh', method: 'post', propertyName: false },
-          logout: { url: '/auth/logout', method: 'post' },
-        },
-        tokenType: 'bearer',
-      }
-    },
-    plugins: ['~/plugins/auth.js']
+					property: 'user',
+					// autoFetch: true
+				},
+				endpoints: {
+					login: {
+						url: '/auth/login',
+						method: 'post',
+						propertyName: 'access_token',
+					},
+					user: { url: '/auth/me', method: 'get', propertyName: false },
+					refresh: {
+						url: '/auth/refresh',
+						method: 'post',
+						propertyName: false,
+					},
+					logout: { url: '/auth/logout', method: 'post' },
+				},
+				tokenType: 'bearer',
+			},
+		},
+		plugins: ['~/plugins/auth.js'],
 	},
 
 	axios: {
 		baseURL: 'http://localhost:8000/api',
 		credentials: true,
 	},
-
 
 	build: {},
 }
