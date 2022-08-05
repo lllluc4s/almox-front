@@ -80,8 +80,6 @@ export default {
   data() {
     return {
       showModal: false,
-      users: [],
-      user_id: '',
       equipments: [],
       equipment_id: '',
     }
@@ -89,7 +87,6 @@ export default {
 
   mounted() {
     this.fetchEquipments()
-    this.fetchUsers()
   },
 
   methods: {
@@ -98,19 +95,9 @@ export default {
       this.equipments = response
     },
 
-    async fetchUsers() {
-      const response = await this.$axios.$get('users')
-      this.users = response
-    },
-
     open(id) {
       this.equipment_id = id
-      this.fetchUsers()
       this.showModal = true
-    },
-
-    setUser(id) {
-      this.user_id = id
     },
 
     cancel() {
@@ -121,7 +108,6 @@ export default {
       if (equipment.status === 'Indisponível') {
         this.$axios
           .$post('bookings/cancel', {
-            user_id: this.user_id,
             equipment_id: this.equipment_id,
           })
           .then(() => {
