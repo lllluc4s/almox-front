@@ -47,7 +47,7 @@
                 fill="#000"
                 class="bi bi-pencil-square"
                 viewBox="0 0 22 22"
-                @click="openReservModal(item.id)"
+                @click="openReserveModal(item.id)"
               >
                 <path
                   d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
@@ -66,7 +66,7 @@
                 fill="#000"
                 class="bi bi-trash-fill"
                 viewBox="0 0 22 22"
-                @click="openReservModal(item.id)"
+                @click="openCancelModal(item.id)"
               >
                 <path
                   d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
@@ -82,23 +82,27 @@
       </table>
     </div>
     <reserve-modal ref="reserveModal" />
+    <cancel-modal ref="cancelModal" />
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import VueSweetalert2 from "vue-sweetalert2";
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
 import ReserveModal from '../../components/modal/ReserveModal.vue'
+import CancelModal from '../../components/modal/CancelModal.vue'
 
-Vue.use(VueSweetalert2);
+Vue.use(VueSweetalert2)
 
 export default {
   components: {
     ReserveModal,
+    CancelModal,
   },
 
   data: () => ({
     equipments: [],
+    equipment: '',
   }),
 
   mounted() {
@@ -108,99 +112,39 @@ export default {
   methods: {
     async fetchEquipments() {
       const response = await this.$axios.$get('equipments')
-
       this.equipments = response
     },
 
-    openReservModal(id) {
+    openReserveModal(id) {
       this.$refs.reserveModal.open(id)
     },
 
-    reservar(id) {
-      const equipment = this.equipments.find((item) => item.id === id)
-
-      if (equipment.status === 'Disponível') {
-        this.$swal({
-          title: 'Deseja reservar este equipamento?',
-          text: 'Selecione um usuário:',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sim, reservar!',
-          cancelButtonText: 'Não, cancelar!',
-          input: 'select',
-          inputOptions: {
-            ...this.users.reduce((acc, user) => {
-              acc[user.id] = user.name
-              return acc
-            }, {}),
-          },
-          inputPlaceholder: 'Selecione:',
-          inputValidator: (value) => {
-            return new Promise(function (resolve, reject) {
-              if (value !== '') {
-                resolve()
-              } else {
-                resolve('Você precisa selecionar uma opção!')
-              }
-            })
-          },
-        }).then((result) => {
-          if (result.value) {
-            this.$swal(
-              'Reservado!',
-              'O equipamento foi reservado com sucesso.',
-              'success',
-              this.$axios
-                .$post('bookings/transaction/', {
-                  equipment_id: id,
-                  user_id: this.user_id,
-                })
-                .then(() => location.reload())
-            )
-          } else if (result.dismiss === this.$swal.DismissReason.cancel) {
-            this.$swal('Cancelado', 'O equipamento não foi reservado.', 'error')
-          }
-        })
-      }
+    openCancelModal(id) {
+      this.$refs.cancelModal.open(id)
     },
 
     cancelarReserva(id) {
-      const equipment = this.equipments.find((item) => item.id === id)
-
-      if (equipment.status === 'Indisponível') {
-        this.$swal({
-          title: 'Cancelar reserva',
-          text: 'Deseja cancelar a reserva deste equipamento?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sim, cancelar!',
-          cancelButtonText: 'Desistir',
-          reverseButtons: false,
-          ...this.users.reduce((acc, user) => {
-            acc[user.id] = user.name
-            this.user_id = user.id
-            return acc
-          }, {}),
-        }).then((result) => {
-          if (result.value) {
-            this.$swal(
-              'Cancelado!',
-              'A reserva do equipamento foi cancelada com sucesso.',
-              'success',
-              this.$axios.$post('bookings/cancel/', {
-                equipment_id: id,
-                user_id: this.user_id,
-              })
-            ).then(() => location.reload())
-          } else if (result.dismiss === this.$swal.DismissReason.cancel) {
-            this.$swal(
-              'Operação cancelada',
-              'A reserva do equipamento não foi cancelada.',
-              'error'
-            )
-          }
-        })
-      }
+      this.$swal({
+        title: 'Tem certeza?',
+        text: 'Você não poderá reverter isso!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, cancelar!',
+        cancelButtonText: 'Não, cancelar!',
+      }).then((result) => {
+        if (result.value) {
+          this.$swal(
+            'Cancelado!',
+            'Seu equipamento foi cancelado com sucesso.',
+            'success',
+            this.$axios.$post('bookings/cancel', {
+              id,
+            })
+          )
+        }
+      })
     },
   },
 }

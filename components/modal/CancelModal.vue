@@ -9,30 +9,6 @@
       :background-close="false"
       @close="showModal = false"
     >
-      <!-- select de usuario botao para reservar botao para desist -->
-      <select
-        id="user_id"
-        v-model="user_id"
-        name="user_id"
-        class="
-          text-center
-          border border-gray-300
-          rounded
-          px-5
-          py-5
-          w-1/2
-          focus:outline-none
-          focus:ring-2
-          focus:ring-purple-600
-          focus:border-transparent
-        "
-      >
-        <option v-for="item in users" :key="item.id" :value="item.id">
-          {{ item.name }}
-        </option>
-      </select>
-      <br />
-      <br />
       <button
         class="
           rounded
@@ -55,9 +31,9 @@
           ease-in-out
           duration-150
         "
-        @click="reserve"
+        @click="cancel"
       >
-        Reservar
+        Cancelar reserva
       </button>
       <button
         class="
@@ -137,14 +113,14 @@ export default {
       this.user_id = id
     },
 
-    reserve() {
+    cancel() {
       const equipment = this.equipments.find(
         (item) => item.id === this.equipment_id
       )
 
-      if (equipment.status === 'Disponível') {
+      if (equipment.status === 'Indisponível') {
         this.$axios
-          .$post('bookings/transaction', {
+          .$post('bookings/cancel', {
             user_id: this.user_id,
             equipment_id: this.equipment_id,
           })
