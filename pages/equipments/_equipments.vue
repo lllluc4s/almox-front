@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-10 flex justify-center">
+    <div class="mt-40 mb-10 flex justify-center">
       <span>Aqui você acompanha a lista de equipamentos.</span>
     </div>
     <div>

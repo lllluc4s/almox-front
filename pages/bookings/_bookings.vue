@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-20 flex justify-center">
+    <div class="mt-40 mb-20 flex justify-center">
       <span>Aqui você acompanha todas as reservas.</span>
     </div>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/2 mx-auto bg-white p-5 rounded-lg">
+  <div class="w-1/2 mx-auto bg-white p-5 mt-40 rounded-lg">
     <form method="post" autoComplete="off" @submit.prevent="submit">
       <div class="mt-4">
         <Label html-for="name">Nome</Label>

@@ -1,5 +1,13 @@
 <template>
   <div>
+    <div class="flex justify-center items-center mt-20 mb-10">
+      <img
+        src="https://media.discordapp.net/attachments/993924903298404463/1005187346611839126/3.png"
+        alt="Imagem de perfil"
+        class="rounded-full"
+      />
+    </div>
+
     <h1 class="text-3xl font-black mb-10 flex justify-center">
       Oi, {{ $auth.user.name }}!
     </h1>

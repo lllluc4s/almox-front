@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-white">
+    <div id="navbar" class="bg-white">
       <main class="shadow">
         <div
           class="
@@ -117,3 +117,13 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+</style>
