@@ -111,8 +111,17 @@ export default {
             equipment_id: this.equipment_id,
           })
           .then(() => {
+            this.$swal({
+              type: 'success',
+              title: 'Reserva cancelada com sucesso',
+              showConfirmButton: false,
+              timer: 2000,
+            })
+
             this.showModal = false
             this.fetchEquipments()
+
+            window.location.reload()
           })
       }
     },
