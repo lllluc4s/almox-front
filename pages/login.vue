@@ -69,6 +69,13 @@ export default {
         },
       })
 
+      this.$swal({
+        title: 'Sucesso!',
+        text: 'Usuário logado com sucesso!',
+        type: 'success',
+        showConfirmButton: false,
+        timer: 2000,
+      })
       this.$router.push('/')
     },
   },

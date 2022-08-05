@@ -122,30 +122,6 @@ export default {
     openCancelModal(id) {
       this.$refs.cancelModal.open(id)
     },
-
-    cancelarReserva(id) {
-      this.$swal({
-        title: 'Tem certeza?',
-        text: 'Você não poderá reverter isso!',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, cancelar!',
-        cancelButtonText: 'Não, cancelar!',
-      }).then((result) => {
-        if (result.value) {
-          this.$swal(
-            'Cancelado!',
-            'Seu equipamento foi cancelado com sucesso.',
-            'success',
-            this.$axios.$post('bookings/cancel', {
-              id,
-            })
-          )
-        }
-      })
-    },
   },
 }
 </script>

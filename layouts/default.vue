@@ -109,10 +109,30 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+Vue.use(VueSweetalert2)
+
 export default {
   methods: {
     logout() {
-      this.$auth.logout()
+      this.$swal({
+        title: 'Tem certeza?',
+        text: 'Você será deslogado do sistema.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, deslogar!',
+        cancelButtonText: 'Não, cancelar!',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        reverseButtons: false,
+      }).then((result) => {
+        if (result.value) {
+          this.$auth.logout()
+          this.$swal('Deslogado!', 'Você foi deslogado do sistema.', 'success')
+        }
+      })
     },
   },
 }

@@ -60,6 +60,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+Vue.use(VueSweetalert2)
+
 export default {
   data: () => ({
     valid: true,
@@ -79,26 +84,25 @@ export default {
       }
 
       if (this.valid) {
-        this.$axios
-          .$post('http://127.0.0.1:8000/api/users', data)
-          .then(() => {
-            alert('Opa, deu tudo certo! Conta criada com sucesso!')
-          })
-          .catch(() => {
-            alert('Ops, algo deu errado! Tente novamente.')
-          })
+        this.$swal({
+          title: 'Conta criada com sucesso!',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+        })
 
-        this.resetForm()
+        this.$axios.$post('http://127.0.0.1:8000/api/users', data)
+
+        this.$router.push('/')
       } else {
-        alert('Preencha os campos necessários!')
+        this.$swal({
+          title: 'Erro ao criar conta!',
+          text: 'Por favor, tente novamente.',
+          type: 'error',
+          showConfirmButton: false,
+          timer: 2000,
+        })
       }
-    },
-
-    resetForm() {
-      this.name = ''
-      this.email = ''
-      this.password = ''
-      this.type = ''
     },
   },
 }
