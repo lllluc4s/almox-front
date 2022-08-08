@@ -17,15 +17,15 @@
       </div>
 
       <div class="mt-4">
-        <Label html-for="patrimony">Patrimônio</Label>
+        <Label html-for="patrimony">Quantidade</Label>
         <Input
-          id="patrimony"
-          v-model="patrimony"
+          id="quantity"
+          v-model="quantity"
           type="string"
           class="block mt-1 w-full"
           required
           auto-complete="off"
-          placeholder="Ex: Braip / KPG / Kapsula"
+          placeholder="Inclua a quantidade de itens disponíveis"
         />
       </div>
 

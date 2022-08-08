@@ -57,7 +57,7 @@
         <thead>
           <tr>
             <th class="border border-slate-900 px-4 py-4">Equipamento</th>
-            <th class="border border-slate-600 px-4 py-4">Patrimônio</th>
+						<th class="border border-slate-600 px-4 py-4">Quantidade</th>
             <th class="border border-slate-600 px-4 py-4">Status</th>
             <th class="border border-slate-600 px-4 py-4">Ações</th>
           </tr>
@@ -65,9 +65,7 @@
         <tbody>
           <tr v-for="item in equipments" :key="item.id">
             <td class="border border-slate-600 px-2 py-2">{{ item.type }}</td>
-            <td class="border border-slate-600 px-2 py-2">
-              {{ item.patrimony }}
-            </td>
+						<td class="border border-slate-600 px-2 py-2">{{ item.quantity }}</td>
             <td class="border border-slate-600 px-2 py-2">{{ item.status }}</td>
             <td
               class="

@@ -53,16 +53,41 @@
           focus:border-transparent
         "
       >
-        <option value="">Braip</option>
-        <option value="">Kapsula</option>
-        <option value="">KPG</option>
-        <!-- <option
-          v-for="patrimony in equipments"
-          :key="patrimony.id"
-          :value="patrimony.id"
-        >
-          {{ patrimony.patrimony }}
-        </option> -->
+        <option value="Braip">Braip</option>
+        <option value="Kapsula">Kapsula</option>
+        <option value="KPG">KPG</option>
+      </select>
+      <br /><br />
+
+      <span>Selecione a quantidade</span>
+      <br />
+      <select
+        id="quantity_id"
+        v-model="quantity_id"
+        name="quantity_id"
+        class="
+          text-center
+          border border-gray-300
+          rounded
+          px-5
+          py-5
+          w-1/2
+          focus:outline-none
+          focus:ring-2
+          focus:ring-purple-600
+          focus:border-transparent
+        "
+      >
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
       </select>
 
       <br />
