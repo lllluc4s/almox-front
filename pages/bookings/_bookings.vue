@@ -41,6 +41,7 @@
           <tr>
             <th class="border border-slate-900 px-4 py-4">Usuário</th>
             <th class="border border-slate-600 px-4 py-4">Equipamento</th>
+            <th class="border border-slate-600 px-4 py-4">Patrimônio</th>
             <th class="border border-slate-600 px-4 py-4">Quantidade</th>
             <th class="border border-slate-600 px-4 py-4">Data da Reserva</th>
             <th class="border border-slate-600 px-4 py-4">Entrada / Saída</th>
@@ -53,6 +54,9 @@
             </td>
             <td class="border border-slate-600 px-2 py-2">
               {{ item.equipment_type }}
+            </td>
+            <td class="border border-slate-600 px-2 py-2">
+              {{ item.patrimony }}
             </td>
             <td class="border border-slate-600 px-2 py-2">
               {{ item.quantity }}
