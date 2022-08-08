@@ -1,7 +1,24 @@
 <template>
   <div>
     <div class="mt-40 mb-10 flex justify-center">
-      <span>Aqui você acompanha a lista de equipamentos.</span>
+      <span>Aqui você registra e acompanha a lista de equipamentos.</span>
+    </div>
+
+    <div class="flex justify-center items-center mb-10">
+      <NuxtLink
+        to="/equipmentCreate"
+        class="
+          text-gray-700
+          mr-7
+          border border-gray-300
+          hover:border-purple-400 hover:text-purple-700
+          rounded
+          px-4
+          py-2
+        "
+      >
+        Controle de equipamentos
+      </NuxtLink>
     </div>
 
     <div class="flex justify-center items-center">
