@@ -163,11 +163,16 @@ export default {
   data() {
     return {
       showModal: false,
+
       users: [],
       user_id: '',
+
       equipments: [],
       equipment_id: '',
+
       patrimony_id: '',
+
+      quantity_id: '',
     }
   },
 
@@ -207,6 +212,8 @@ export default {
           .$post('bookings/transaction', {
             user_id: this.user_id,
             equipment_id: this.equipment_id,
+            patrimony_id: this.patrimony_id,
+            quantity_id: this.quantity_id,
           })
           .then(() => {
             this.$swal({
