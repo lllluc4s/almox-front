@@ -9,7 +9,8 @@
       :background-close="false"
       @close="showModal = false"
     >
-      <!-- select de usuario botao para reservar botao para desist -->
+      <span>Selecione um usuário</span>
+      <br />
       <select
         id="user_id"
         v-model="user_id"
@@ -27,10 +28,43 @@
           focus:border-transparent
         "
       >
-        <option v-for="item in users" :key="item.id" :value="item.id">
-          {{ item.name }}
+        <option v-for="user in users" :key="user.id" :value="user.id">
+          {{ user.name }}
         </option>
       </select>
+      <br /><br />
+
+      <span>Selecione o patrimônio</span>
+      <br />
+      <select
+        id="patrimony_id"
+        v-model="patrimony_id"
+        name="patrimony_id"
+        class="
+          text-center
+          border border-gray-300
+          rounded
+          px-5
+          py-5
+          w-1/2
+          focus:outline-none
+          focus:ring-2
+          focus:ring-purple-600
+          focus:border-transparent
+        "
+      >
+        <option value="">Braip</option>
+        <option value="">Kapsula</option>
+        <option value="">KPG</option>
+        <!-- <option
+          v-for="patrimony in equipments"
+          :key="patrimony.id"
+          :value="patrimony.id"
+        >
+          {{ patrimony.patrimony }}
+        </option> -->
+      </select>
+
       <br />
       <br />
       <button
@@ -108,6 +142,7 @@ export default {
       user_id: '',
       equipments: [],
       equipment_id: '',
+      patrimony_id: '',
     }
   },
 
