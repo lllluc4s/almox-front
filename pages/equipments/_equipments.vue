@@ -22,7 +22,7 @@
           focus:ring-purple-600
           focus:border-transparent
         "
-        @input="filterBookings"
+        @input="filterEquipments"
       />
     </div>
 
@@ -126,6 +126,7 @@ export default {
   data: () => ({
     equipments: [],
     equipment: '',
+    filtro: '',
   }),
 
   mounted() {
@@ -144,6 +145,17 @@ export default {
 
     openCancelModal(id) {
       this.$refs.cancelModal.open(id)
+    },
+
+    filterEquipments() {
+      this.$axios
+        .get('equipments', { params: { filtro: this.filtro } })
+        .then((response) => {
+          this.equipments = response.data
+        })
+        .then((response) => {
+          this.equipments = response.data
+        })
     },
   },
 }
