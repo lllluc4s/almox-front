@@ -73,8 +73,6 @@ export default {
     filtro: '',
   }),
 
-  // computed: {},
-
   async mounted() {
     const response = await this.$axios.$get('bookings')
     this.bookings = response

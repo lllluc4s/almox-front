@@ -3,6 +3,29 @@
     <div class="mt-40 mb-10 flex justify-center">
       <span>Aqui você acompanha a lista de equipamentos.</span>
     </div>
+
+    <div class="flex justify-center items-center">
+      <input
+        v-model="filtro"
+        placeholder="Filtrar"
+        type="search"
+        name="filtro"
+        class="
+          text-center
+          border border-gray-300
+          rounded
+          px-4
+          py-2
+          w-1/2
+          focus:outline-none
+          focus:ring-2
+          focus:ring-purple-600
+          focus:border-transparent
+        "
+        @input="filterBookings"
+      />
+    </div>
+
     <div>
       <table
         class="
