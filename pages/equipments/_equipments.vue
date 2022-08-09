@@ -93,7 +93,8 @@
                 Reservar
               </button>
 
-              <button
+              <nuxt-link
+                :to="`/equipmentEdit/${item.id}`"
                 class="
                   rounded
                   inline-flex
@@ -115,10 +116,9 @@
                   ease-in-out
                   duration-150
                 "
-                @click="editEquipment(item.id)"
               >
                 Editar
-              </button>
+              </nuxt-link>
 
               <button
                 class="

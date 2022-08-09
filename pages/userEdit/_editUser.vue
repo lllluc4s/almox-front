@@ -60,6 +60,10 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+Vue.use(VueSweetalert2)
 
 export default {
   middleware: 'auth',
@@ -85,10 +89,20 @@ export default {
         this.$axios
           .$put(`/users/${this.$auth.user.id}`, data)
           .then(() => {
-            alert('Opa, deu tudo certo! Conta alterada com sucesso!')
+            this.$swal({
+              title: 'Sucesso!',
+              text: 'Usuário editado com sucesso!',
+              type: 'success',
+            }).then(() => {
+              this.$router.push('/users')
+            })
           })
           .catch(() => {
-            alert('Ops, algo deu errado! Tente novamente.')
+            this.$swal({
+              title: 'Erro!',
+              text: 'Erro ao editar usuário!',
+              type: 'error',
+            })
           })
 
         this.resetForm()
