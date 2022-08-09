@@ -45,6 +45,7 @@
             <th class="border border-slate-600 px-4 py-4">Quantidade</th>
             <th class="border border-slate-600 px-4 py-4">Data da Reserva</th>
             <th class="border border-slate-600 px-4 py-4">Entrada / Saída</th>
+            <th class="border border-slate-600 px-4 py-4">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -67,26 +68,75 @@
             <td class="border border-slate-600 px-2 py-2">
               {{ item.transaction }}
             </td>
+            <td
+              v-if="item.transaction === 'Reserva'"
+              class="border border-slate-600 px-2 py-2"
+            >
+              <button
+                class="
+                  rounded
+                  inline-flex
+                  items-center
+                  px-4
+                  py-2
+                  bg-purple-700
+                  border border-transparent
+                  font-semibold
+                  text-xs text-white
+                  uppercase
+                  tracking-widest
+                  hover:bg-purple-800
+                  active:bg-purple-900
+                  focus:outline-none focus:border-purple-900 focus:ring
+                  ring-purple-300
+                  disabled:opacity-25
+                  transition
+                  ease-in-out
+                  duration-150
+                "
+                @click="openBookingCancel(item.id)"
+              >
+                Cancelar reserva
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <booking-cancel ref="bookingCancel" />
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+import BookingCancel from '../../components/modal/BookingCancel.vue'
+
+Vue.use(VueSweetalert2)
+
 export default {
+  components: { BookingCancel },
+
   data: () => ({
     bookings: [],
+    booking: '',
     filtro: '',
   }),
 
-  async mounted() {
-    const response = await this.$axios.$get('bookings')
-    this.bookings = response
+  mounted() {
+    this.fetchBookings()
   },
 
   methods: {
+    async fetchBookings() {
+      const response = await this.$axios.get('/bookings')
+      this.bookings = response.data
+    },
+
+    openBookingCancel(id) {
+      this.$refs.bookingCancel.open(id)
+    },
+
     filterBookings() {
       this.$axios
         .get('bookings', { params: { filtro: this.filtro } })

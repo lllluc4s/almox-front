@@ -57,7 +57,6 @@
         <thead>
           <tr>
             <th class="border border-slate-900 px-4 py-4">Equipamento</th>
-						<th class="border border-slate-600 px-4 py-4">Quantidade</th>
             <th class="border border-slate-600 px-4 py-4">Status</th>
             <th class="border border-slate-600 px-4 py-4">Ações</th>
           </tr>
@@ -65,7 +64,6 @@
         <tbody>
           <tr v-for="item in equipments" :key="item.id">
             <td class="border border-slate-600 px-2 py-2">{{ item.type }}</td>
-						<td class="border border-slate-600 px-2 py-2">{{ item.quantity }}</td>
             <td class="border border-slate-600 px-2 py-2">{{ item.status }}</td>
             <td
               class="
@@ -77,43 +75,86 @@
                 items-center
               "
             >
-              <svg
-                v-if="item.status === 'Disponível'"
-                xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                fill="#000"
-                class="bi bi-pencil-square"
-                viewBox="0 0 22 22"
+              <button
+                class="
+                  rounded
+                  inline-flex
+                  items-center
+                  px-4
+                  py-2
+                  bg-purple-700
+                  border border-transparent
+                  font-semibold
+                  text-xs text-white
+                  uppercase
+                  tracking-widest
+                  hover:bg-purple-800
+                  active:bg-purple-900
+                  focus:outline-none focus:border-purple-900 focus:ring
+                  ring-purple-300
+                  disabled:opacity-25
+                  transition
+                  ease-in-out
+                  duration-150
+                "
                 @click="openReserveModal(item.id)"
               >
-                <path
-                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                />
-              </svg>
+                Reservar
+              </button>
 
-              <svg
-                v-if="item.status === 'Indisponível'"
-                xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                fill="#000"
-                class="bi bi-trash-fill"
-                viewBox="0 0 22 22"
+              <button
+                class="
+                  rounded
+                  inline-flex
+                  items-center
+                  px-4
+                  py-2
+                  bg-purple-700
+                  border border-transparent
+                  font-semibold
+                  text-xs text-white
+                  uppercase
+                  tracking-widest
+                  hover:bg-purple-800
+                  active:bg-purple-900
+                  focus:outline-none focus:border-purple-900 focus:ring
+                  ring-purple-300
+                  disabled:opacity-25
+                  transition
+                  ease-in-out
+                  duration-150
+                "
                 @click="openCancelModal(item.id)"
               >
-                <path
-                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                />
-              </svg>
+                Cancelar
+              </button>
+
+              <button
+                class="
+                  rounded
+                  inline-flex
+                  items-center
+                  px-4
+                  py-2
+                  bg-purple-700
+                  border border-transparent
+                  font-semibold
+                  text-xs text-white
+                  uppercase
+                  tracking-widest
+                  hover:bg-purple-800
+                  active:bg-purple-900
+                  focus:outline-none focus:border-purple-900 focus:ring
+                  ring-purple-300
+                  disabled:opacity-25
+                  transition
+                  ease-in-out
+                  duration-150
+                "
+                @click="openCancelModal(item.id)"
+              >
+                Excluir
+              </button>
             </td>
           </tr>
         </tbody>
@@ -172,6 +213,24 @@ export default {
           this.equipments = response.data
         })
     },
+  },
+
+  deleteEquipment(id) {
+    this.$swal({
+      title: 'Tem certeza que deseja excluir?',
+      text: 'Você não poderá reverter isso!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, excluir!',
+    }).then(async (result) => {
+      if (result.value) {
+        await this.$axios.$delete(`equipments/${id}`)
+        this.fetchEquipments()
+        this.$swal('Excluído!', 'O equipamento foi excluído.', 'success')
+      }
+    })
   },
 }
 </script>
