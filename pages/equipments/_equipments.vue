@@ -65,22 +65,13 @@
           <tr v-for="item in equipments" :key="item.id">
             <td class="border border-slate-600 px-2 py-2">{{ item.type }}</td>
             <td class="border border-slate-600 px-2 py-2">{{ item.status }}</td>
-            <td
-              class="
-                border border-slate-600
-                px-2
-                py-2
-                flex
-                justify-center
-                items-center
-              "
-            >
+            <td class="border border-slate-600 px-1 py-1 flex justify-evenly">
               <button
                 class="
                   rounded
                   inline-flex
                   items-center
-                  px-4
+                  px-2
                   py-2
                   bg-purple-700
                   border border-transparent
@@ -107,7 +98,7 @@
                   rounded
                   inline-flex
                   items-center
-                  px-4
+                  px-2
                   py-2
                   bg-purple-700
                   border border-transparent
@@ -126,7 +117,7 @@
                 "
                 @click="openCancelModal(item.id)"
               >
-                Cancelar
+                Editar
               </button>
 
               <button
@@ -134,7 +125,7 @@
                   rounded
                   inline-flex
                   items-center
-                  px-4
+                  px-2
                   py-2
                   bg-purple-700
                   border border-transparent

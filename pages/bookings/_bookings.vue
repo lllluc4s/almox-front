@@ -77,7 +77,7 @@
                   rounded
                   inline-flex
                   items-center
-                  px-4
+                  px-2
                   py-2
                   bg-purple-700
                   border border-transparent
