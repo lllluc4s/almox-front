@@ -37,9 +37,9 @@
       <span>Selecione o patrimônio</span>
       <br />
       <select
-        id="patrimony_id"
-        v-model="patrimony_id"
-        name="patrimony_id"
+        id="patrimony"
+        v-model="patrimony"
+        name="patrimony"
         class="
           text-center
           border border-gray-300
@@ -62,9 +62,9 @@
       <span>Selecione a quantidade</span>
       <br />
       <select
-        id="quantity_id"
-        v-model="quantity_id"
-        name="quantity_id"
+        id="quantity"
+        v-model="quantity"
+        name="quantity"
         class="
           text-center
           border border-gray-300
@@ -170,9 +170,9 @@ export default {
       equipments: [],
       equipment_id: '',
 
-      patrimony_id: '',
+      patrimony: '',
 
-      quantity_id: '',
+      quantity: '',
     }
   },
 
@@ -212,8 +212,8 @@ export default {
           .$post('bookings/transaction', {
             user_id: this.user_id,
             equipment_id: this.equipment_id,
-            patrimony_id: this.patrimony_id,
-            quantity_id: this.quantity_id,
+            patrimony: this.patrimony,
+            quantity: this.quantity,
           })
           .then(() => {
             this.$swal({

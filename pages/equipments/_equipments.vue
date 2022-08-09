@@ -115,7 +115,7 @@
                   ease-in-out
                   duration-150
                 "
-                @click="openCancelModal(item.id)"
+                @click="editEquipment(item.id)"
               >
                 Editar
               </button>
@@ -142,7 +142,7 @@
                   ease-in-out
                   duration-150
                 "
-                @click="openCancelModal(item.id)"
+                @click="deleteEquipment(item.id)"
               >
                 Excluir
               </button>
@@ -204,6 +204,10 @@ export default {
           this.equipments = response.data
         })
     },
+  },
+
+  editEquipment(id) {
+    this.$router.push(`/equipmentEdit/${id}`)
   },
 
   deleteEquipment(id) {

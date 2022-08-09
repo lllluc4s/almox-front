@@ -17,19 +17,6 @@
       </div>
 
       <div class="mt-4">
-        <Label html-for="patrimony">Quantidade</Label>
-        <Input
-          id="quantity"
-          v-model="quantity"
-          type="string"
-          class="block mt-1 w-full"
-          required
-          auto-complete="off"
-          placeholder="Inclua a quantidade de itens disponíveis"
-        />
-      </div>
-
-      <div class="mt-4">
         <Label html-for="status">Status</Label>
         <Input
           id="status"
