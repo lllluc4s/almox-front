@@ -17,7 +17,7 @@
           py-2
         "
       >
-        Controle de equipamentos
+        Cadastrar equipamento
       </NuxtLink>
     </div>
 

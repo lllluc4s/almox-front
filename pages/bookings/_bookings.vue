@@ -99,6 +99,9 @@
                 Cancelar reserva
               </button>
             </td>
+            <td v-else class="border border-slate-600 px-2 py-2">
+              <span>Sem ações disponíveis</span>
+            </td>
           </tr>
         </tbody>
       </table>
