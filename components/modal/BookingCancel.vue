@@ -101,16 +101,13 @@ export default {
     },
 
     cancel() {
-      const booking = this.bookings.find(
-        (booking) => booking.id === this.booking_id
-      )
+      const booking = this.bookings.find((item) => item.id === this.booking_id)
 
       if (booking.transaction === 'Reserva') {
         this.$axios
           .$post(`bookings/cancel`, {
-						booking_id: this.booking_id,
-						
-					})
+            booking_id: this.booking_id,
+          })
           .then(() => {
             this.$swal({
               title: 'Reserva cancelada com sucesso!',
@@ -119,6 +116,8 @@ export default {
             })
             this.showModal = false
             this.fetchBookings()
+
+            window.location.reload()
           })
           .catch(() => {
             this.$swal({
