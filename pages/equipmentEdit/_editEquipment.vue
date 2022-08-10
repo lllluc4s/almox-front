@@ -56,7 +56,7 @@ export default {
 
       if (this.valid) {
         this.$axios
-          .$put(`/equipments/${this.$auth.user.id}`, data)
+          .$put(`/equipments/{id}`, data)
           .then(() => {
             this.$swal({
               title: 'Sucesso!',
