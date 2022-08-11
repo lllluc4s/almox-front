@@ -56,7 +56,7 @@ export default {
 
       if (this.valid) {
         this.$axios
-          .$put(`/equipments/{id}`, data)
+          .$put('/equipments/' + this.$route.params.id, data)
           .then(() => {
             this.$swal({
               title: 'Sucesso!',
