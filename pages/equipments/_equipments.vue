@@ -204,28 +204,31 @@ export default {
           this.equipments = response.data
         })
     },
-  },
 
-  editEquipment(id) {
-    this.$router.push(`/equipmentEdit/${id}`)
-  },
+    editEquipment(id) {
+      this.$router.push(`/equipmentEdit/${id}`)
+    },
 
-  deleteEquipment(id) {
-    this.$swal({
-      title: 'Tem certeza que deseja excluir?',
-      text: 'Você não poderá reverter isso!',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, excluir!',
-    }).then(async (result) => {
-      if (result.value) {
-        await this.$axios.$delete(`equipments/${id}`)
-        this.fetchEquipments()
-        this.$swal('Excluído!', 'O equipamento foi excluído.', 'success')
-      }
-    })
+    deleteEquipment(id) {
+      this.$swal({
+        title: 'Excluir equipamento',
+        text: 'Tem certeza que deseja excluir este equipamento?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar',
+      }).then(async (result) => {
+        if (result.value) {
+          await this.$axios.$delete(`equipments/${id}`)
+          this.$swal('Excluído!', 'O equipamento foi excluído.', 'success')
+          this.fetchEquipments()
+        } else {
+          this.$swal('Cancelado', 'O equipamento não foi excluído.', 'error')
+        }
+      })
+    },
   },
 }
 </script>

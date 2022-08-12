@@ -18,7 +18,7 @@
         <Input
           id="status"
           v-model="status"
-          type="email"
+          type="string"
           class="block mt-1 w-full"
           required
           auto-focus
